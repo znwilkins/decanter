@@ -1,5 +1,5 @@
-@load /opt/bro/share/bro/base/protocols/http
-@load /opt/bro/share/bro/base/protocols/conn
+@load /opt/zeek/share/zeek/base/protocols/http
+@load /opt/zeek/share/zeek/base/protocols/conn
 
 redef record HTTP::Info += {
 	## Write in the log ALL header names and their values
@@ -9,7 +9,7 @@ redef record HTTP::Info += {
 	mac_orig: string	&optional	&log;
 };
 
-event bro_init()
+event zeek_init()
 	{
 		local filter: Log::Filter = [$name="decanter_http", $path="decanter", $include=set("ts", "uid", "id.orig_h", "id.orig_p", "id.resp_h", "id.resp_p", "mac_orig", "method", "uri", "version", "request_body_len", "proxied", "orig_mime_types", "header_values")];
 		#filter$interv = 6 hr;
