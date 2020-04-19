@@ -34,7 +34,7 @@ class DumontClassifier:
         self.clf.fit(data)
         distances = sorted(self.clf.decision_function(data))
         border = min(len(distances)-1, int(math.ceil(len(distances)*(1-self.fp))))
-        self.width = distances[border][0]
+        self.width = distances[border]
         
     def calibrate(self, normal, anomalous):
         """ Calibrate the classifier with both normal and anomalous data.
@@ -50,8 +50,8 @@ class DumontClassifier:
             """
         normal = self.clf.decision_function(normal)
         anomalous = self.clf.decision_function(anomalous)
-        normal = map(lambda entry: (entry[0], 0), normal)
-        anomalous = map(lambda entry: (entry[0], 1), anomalous)
+        normal = map(lambda entry: (entry, 0), normal)
+        anomalous = map(lambda entry: (entry, 1), anomalous)
         total = sorted(normal + anomalous, key=lambda tup: tup[0])
         
         p = len(normal)
@@ -95,7 +95,7 @@ class DumontClassifier:
                 was benign and False indicates the request was Malicious.
             """
         distance = self.clf.decision_function(data)
-        return list(map(lambda entry: entry[0] <= self.width, distance))
+        return list(map(lambda entry: entry <= self.width, distance))
     
     def __distance__(self, x, y):
         """ Auxilliary method to compute the distance between x and y.

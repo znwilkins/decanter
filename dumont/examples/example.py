@@ -9,8 +9,8 @@ import dumont
 # Read data from log files
 # Merge all benign data files into single benign_data array
 benign_data    = dumont.parseLOG('./data/benign/VM_ransomware1.log')
-benign_data.extend(dumont.parseLOG('./data/benign/VM_ransomware1.log'))
-benign_data.extend(dumont.parseLOG('./data/benign/VM_ransomware1.log'))
+benign_data.extend(dumont.parseLOG('./data/benign/VM_ransomware2.log'))
+benign_data.extend(dumont.parseLOG('./data/benign/VM_ransomware3.log'))
 
 # Merge all malicious data files into single malicious_data array
 malicious_data = dumont.parseLOG('./data/malicious/malicious_1.log')
